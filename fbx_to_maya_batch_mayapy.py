@@ -35,7 +35,7 @@ for root, dirnames, filenames in os.walk(path):
 
 for a in checking:
     count=checking.index(a)
-    print 'Doing %s: %s of %s' % (i,count+1,len(checking))
+    print 'Doing %s: %s of %s' % (a,count+1,len(checking))
     fname = str(a).rsplit("\\",1)
     final = (os.path.basename(fname[0]))
     tanpaextensi = (os.path.splitext(final)[0])
@@ -52,4 +52,5 @@ for a in checking:
         cmds.file(save=True, type="mayaAscii")
         cmds.file(new=1, f=1)
         print ("File " + tanpaextensi +  " doesnt exist, created new file in " + path)
+
 
