@@ -31,10 +31,4 @@ cmds.file(save=True, type=typefile)
 cmds.file(new=1, f=1)
 
 # Auto Open Directory
-if len(path_maya) > 0:
-    try:
-        os.startfile(path_maya)
-    except:
-        subprocess.Popen(['xdg-open', act.export_dir])
-else:
-    pass
+os.startfile(path_maya)
