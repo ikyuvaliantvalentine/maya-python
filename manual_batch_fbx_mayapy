@@ -1,0 +1,40 @@
+import maya.standalone
+maya.standalone.initialize(name = 'python')
+import os
+import maya.cmds as cmds
+import pymel.core as pm
+
+cmds.loadPlugin("fbxmaya", quiet=True) # LOAD PLUGIN
+
+# IMPORT FROM
+path="D:\Submission\FBX_NEW".replace('\\', '/') + '/' # Change Path
+filename = "lion" # From Filename
+ext = ".fbx"
+pm.mel.FBXImport(f=path + filename + ext ,t="TAKE")
+
+# SAVE FILE TO
+path_maya = "D:\Submission\FBX_NEW".replace('\\', '/') + '/' #Change Path
+mayaname = "lion" # Change Name
+ext = ".ma"
+typefile = "mayaAscii"
+
+# Assign All Object to Lambert
+all = cmds.ls(type='mesh')
+defmat = 'initialShadingGroup'
+cmds.sets(all, e=True, forceElement=defmat)
+cmds.delete (cmds.ls(type='shadingDependNode'))
+cmds.delete (cmds.ls(type='shadingEngine'))
+
+# Save Maya & Refresh Scene    
+cmds.file(rename=path_maya + mayaname + ext )
+cmds.file(save=True, type=typefile)
+cmds.file(new=1, f=1)
+
+# Auto Open Directory
+if len(path_maya) > 0:
+    try:
+        os.startfile(path_maya)
+    except:
+        subprocess.Popen(['xdg-open', act.export_dir])
+else:
+    pass
