@@ -1,0 +1,15 @@
+import maya.standalone
+maya.standalone.initialize("Python")
+import maya.cmds as cmds
+import os
+cmds.loadPlugin("fbxmaya", quiet=True)
+openmayafile = "D:\Project\SALMON\out-museum-armor-hessian-cap\out-museum-armor-hessian-cap-blockout.ma".replace("\\", "/") 
+opened_file = cmds.file(openmayafile, o=True)
+geometry = cmds.ls(geometry=True)
+transforms = cmds.listRelatives(geometry, p=True, path=True)
+cmds.select(transforms, r=True)
+path = 'D:\Project\SALMON\out-museum-armor-hessian-cap'.replace("\\", "/")
+filename = 'FinalOutput'
+ext = '.fbx'
+cmds.FBXExport('-file', path + '/' + filename + ext, '-s')
+os.startfile(path)
